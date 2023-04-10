@@ -1,0 +1,36 @@
+.notfound404{
+    font-family: montserrat,sans-serif;
+    font-size: 100px;   
+    background: url(./bg.jpg) no-repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: cover;
+    background-position: center;
+}
+.notfound{
+    /* border: 2px solid white; */
+    margin-bottom: 200px;
+}
+h2{
+    font-weight: bolder;
+    /* color:rgb(162, 157, 157) */
+}
+p{
+    font-weight: bold;
+    /* color: rgb(110, 108, 108); */
+}
+h1 {
+    font-size: 2em;
+    width: 40vw;
+    font-weight: bolder;
+}
+.notfound2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 94.3vh;
+    overflow: hidden;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+}
