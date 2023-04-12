@@ -41,10 +41,22 @@ function Signin() {
         type: "success",
         theme: "colored",
       });
-      
+    }
+    else if(res.status===400){
+      toast("Invalid Credentials!", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "error",
+        theme: "colored",
+      });
     }
     else{
-      toast("Invalid Credentials!", {
+      toast("Network Issue!", {
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: false,
@@ -92,6 +104,7 @@ function Signin() {
         </div>
       </Box>
       <Button variant="contained" className={style.btn} onClick={handleSubmit}>Sign In</Button>
+      <NavLink to="/signin/forgetpass">Forget Password?</NavLink>
       <NavLink to="/signup">Don't have an account?</NavLink>
     </div>
   );

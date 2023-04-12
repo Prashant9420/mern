@@ -8,6 +8,7 @@ import Contact from './components/contact/contact';
 import PageNotFound from './components/pageNotFound/pageNotFound';
 import {Routes,Route} from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import ForegetPass from './components/signIn/forgetPass/forgetpass';
 function App() {
   return (
     <div className="App">
@@ -19,6 +20,7 @@ function App() {
             <Route exact path="/about" element={<About />} />
             <Route exact path="/contact" element={<Contact />} />
             <Route exact path="/signin" element={<Signin/>}/>
+            <Route exact path="/signin/forgetpass" element={<ForegetPass/>}/>
             <Route path='/*' element={<PageNotFound/>}/>
           </Routes>
     </div>

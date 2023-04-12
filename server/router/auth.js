@@ -10,6 +10,27 @@ router.get('/', (req, res) => {
     res.send("hello from express router");
 });
 
+router.post('/update',async (req,res)=>{
+  const {emailCopy,pass}=req.body;
+  console.log(emailCopy);
+  console.log(pass);
+  try{
+    const ue = await User.findOne({ email: emailCopy})
+    console.log(ue)
+        if (ue) {
+            console.log(ue);
+            ue.password=pass;
+            await ue.save()
+            res.status(200).json({mess:'everything okay'})
+        }
+        else{
+          res.status(400).json({mess:'email not found'})
+        }
+  }catch(e){
+    res.json({})
+  }
+})
+
 router.post('/register', async (req, res) => {
     const { username, email, phone, work, password, cpassword } = req.body;
     if (!username || !email || !phone || !work || !password || !cpassword) {
@@ -42,14 +63,17 @@ router.post('/login', async (req, res) => {
         if (ema) {
             const pass = await bcrypt.compare(password, ema.password);
             const token = await ema.generateAuthToken();
+            console.log(token)
             if (pass) {
                 res.status(200).json({ mess: 'welcome user' });
+            }else{
+              res.status(400).json({});
             }
         } else {
             res.status(400).json({ mess: 'invalid credentials' });
         }
     } catch (err) {
-        res.json({ err: 'something went wrong' })
+        res.status(401).json({ err: 'something went wrong' })
     }
 
 })
@@ -87,16 +111,7 @@ router.post('/sendmail', async (req, res) => {
         res.status(200).json({});
       }
     });}
-    else{
-      console.log(mode);
-      // let transporter = nodemailer.createTransport({
-      //   service: 'gmail',
-      //   port: 465,
-      //   secure:false,
-      //   auth: {
-      //     user: 'prashantpal2468@gmail.com',
-      //     pass: 'sopzualsmuirgimo'
-      //   }});
+    else if(mode ==='signup'){
       let mailOptions = {
         from: 'prashantpal2468@gmail.com',
         to: email,
@@ -114,6 +129,24 @@ router.post('/sendmail', async (req, res) => {
         }
       });
 
+    }
+    else{
+      let mailOptions = {
+        from: 'prashantpal2468@gmail.com',
+        to: email,
+        subject: 'Email from Prashant',
+        text: message
+      };
+    
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+          res.status(400).json({});
+        } else {
+          console.log('Email sent: ' + info.response);
+          res.status(200).json({});
+        }
+      });
     }
   });
 
