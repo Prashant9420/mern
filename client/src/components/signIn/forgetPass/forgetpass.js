@@ -129,8 +129,21 @@ const Forgetpass = () => {
             });
 
         }
-        else {
-            toast("Something went Wrong", {
+        else if(res.status===400){
+            toast("Invalid Email or doesn't have an account", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                type: "info",
+                theme: "colored",
+            });
+        }
+        else{
+            toast("Network Issue!", {
                 position: "top-center",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -141,7 +154,6 @@ const Forgetpass = () => {
                 type: "error",
                 theme: "colored",
             });
-
         }
     }
     return (

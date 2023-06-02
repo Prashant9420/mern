@@ -9,17 +9,19 @@ import PageNotFound from './components/pageNotFound/pageNotFound';
 import {Routes,Route} from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import ForegetPass from './components/signIn/forgetPass/forgetpass';
+import { useState } from 'react';
 function App() {
+  const [isSignin,SetIsSignin]=useState(false);
   return (
     <div className="App">
-    <ResponsiveAppBar/>
+    <ResponsiveAppBar loginShown={isSignin} signinChkHandler={SetIsSignin}/>
       <ToastContainer/>
           <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/signup" element={<Signup />} />
-            <Route exact path="/about" element={<About />} />
-            <Route exact path="/contact" element={<Contact />} />
-            <Route exact path="/signin" element={<Signin/>}/>
+            <Route exact path="/" element={<Home signinChk={isSignin}/>} />
+            <Route exact path="/signup" element={<Signup signinChkHandler={SetIsSignin}/>} />
+            <Route exact path="/about" element={<About signinChk={isSignin} />} />
+            <Route exact path="/contact" element={<Contact signinChk={isSignin} />} />
+            <Route exact path="/signin" element={<Signin signinChkHandler={SetIsSignin}/>}/>
             <Route exact path="/signin/forgetpass" element={<ForegetPass/>}/>
             <Route path='/*' element={<PageNotFound/>}/>
           </Routes>

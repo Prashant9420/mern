@@ -24,6 +24,46 @@ export default function Signin() {
   const handleSubmit= async (e)=>{
     e.preventDefault();
     const {username,email,phone,work,password,cpassword}=user;
+    if(phone.length!=10){
+      toast("Invalid Phone Number!", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "error",
+        theme: "colored",
+      });
+      return;}
+    // ---------------------------------------------------
+    const resp= await fetch("/sendmail",{
+      method:'POST',
+      headers:{
+        "Content-Type":'application/json'
+      },
+      body:JSON.stringify({username,email,phone,message:'Welcome '+username,mode:"signup"})
+    })
+    await resp.json();
+    if(resp.status ===200){
+      console.log("registered and email sent successfully");
+    }
+    else{
+      toast("Invalid Email!", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: "error",
+        theme: "colored",
+      });
+      return;
+    }
+    // =========================================================
     const res = await fetch("/register",{
       method:"POST",
       headers:{
@@ -81,22 +121,7 @@ export default function Signin() {
         type: "success",
         theme: "colored",
       });
-      // ---------------------------------------------------
-      const res= await fetch("/sendmail",{
-        method:'POST',
-        headers:{
-          "Content-Type":'application/json'
-        },
-        body:JSON.stringify({username,email,phone,message:'Welcome '+username,mode:"signup"})
-      })
-      await res.json();
-      if(res.status ===200){
-        console.log("registered and email sent successfully");
-      }
-      else{
-        console.log("email not sent");
-      }
-      // =========================================================
+      
       console.log("Registered Successfull");
       navigate("/signin")
     }
@@ -125,7 +150,7 @@ export default function Signin() {
         <TextField
           id="outlined-multiline-flexible"
           label="Email"
-          multiline
+          // multiline
           maxRows={4}
           name="email"
           value={user.email}

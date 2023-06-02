@@ -1,5 +1,8 @@
 .info>div{
     display: flex;
+    /* border: 2px solid red; */
+    align-items: center;
+    /* justify-content: center; */
     /* font-size: 100px; */
     /* text-align: center; */
     /* margin-top: 20vh; */
@@ -25,6 +28,6 @@ span{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 90vh;
     
 }

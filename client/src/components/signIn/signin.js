@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-function Signin() {
+function Signin(props) {
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
@@ -28,7 +28,9 @@ function Signin() {
     })
     const data = await res.json();
     console.log(data)
+    localStorage.setItem("userData", JSON.stringify(data));
     if (res.status === 200) {
+      props.signinChkHandler(true)
       navigate("/");
       toast("You are successfully logged in!", {
         position: "top-center",
@@ -42,6 +44,7 @@ function Signin() {
         theme: "colored",
       });
     }
+
     else if(res.status===400){
       toast("Invalid Credentials!", {
         position: "top-center",

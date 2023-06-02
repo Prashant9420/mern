@@ -27,6 +27,26 @@ const schema = mongoose.Schema({
         type: String,
         required: true
     },
+    files: [
+        {
+            fileName: {
+                type: String,
+                required: false
+            },
+            language: {
+                type: String,
+                required: false
+            },
+            fileContent: {
+                type: String,
+                required: false
+            },
+            email: {
+                type: String,
+                required: false
+            }
+        }
+    ],
     tokens: [
         {
             token: {
