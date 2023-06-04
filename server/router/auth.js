@@ -87,7 +87,7 @@ router.post('/getfiles', async (req, res) => {
 // ----------
 
 router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+  const { email, password } = req.body;
     try {
         const ema = await User.findOne({ email: email })
         if (ema) {

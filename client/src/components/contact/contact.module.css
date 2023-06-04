@@ -1,0 +1,36 @@
+.demo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* border: 2px solid green; */
+    height: 90vh;
+}
+.info{
+    display:flex;
+    /* border: 2px solid red; */
+    /* padding: 10px; */
+    /* position: fixed; */
+    /* height: 20%; */
+    justify-content: space-between;
+    width: 80vw;
+}
+.info>div{
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 5px 3px 3px rgb(103, 100, 100);
+    background-color: rgb(210, 239, 210);
+}
+.git{
+    display: flex;
+    /* border: 2px solid black; */
+    border-radius: 20px;
+    background-color: rgb(244, 245, 247);
+    flex-direction: column;
+    height: 60vh;
+    justify-content: space-around;
+    padding: 30px;
+    box-shadow: 5px 3px 3px rgb(103, 100, 100);
+    
+    /* align-items: center; */
+}
