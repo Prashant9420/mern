@@ -29,7 +29,7 @@ const CodeEditor = (props) => {
     // var qs = require('qs');
 
     const getFiles = async () => {
-        const res = await fetch('/getfiles', {
+        const res = await fetch('https://compiler-mern-app.onrender.com/getfiles', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 'email': JSON.parse(localStorage.userData).email })
@@ -52,7 +52,7 @@ const CodeEditor = (props) => {
             codeContent, 'lang': props.pl, fileName, 'email': JSON.parse(localStorage.userData).email
         }
         console.log(fileData);
-        const res = await fetch('/savefile', {
+        const res = await fetch('https://compiler-mern-app.onrender.com/savefile', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(fileData)
