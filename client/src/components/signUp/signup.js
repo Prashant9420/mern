@@ -38,7 +38,7 @@ export default function Signin() {
       });
       return;}
     // ---------------------------------------------------
-    const resp= await fetch("https://compiler-mern-app.onrender.com/sendmail",{
+    const resp= await fetch("/sendmail",{
       method:'POST',
       headers:{
         "Content-Type":'application/json'
@@ -64,7 +64,7 @@ export default function Signin() {
       return;
     }
     // =========================================================
-    const res = await fetch("https://compiler-mern-app.onrender.com/register",{
+    const res = await fetch("/register",{
       method:"POST",
       headers:{
         "Content-Type":"application/json"

@@ -21,7 +21,7 @@ function Signin(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = user;
-    const res = await fetch('https://compiler-mern-app.onrender.com/login', {
+    const res = await fetch('/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json',
     },

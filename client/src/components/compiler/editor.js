@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Output from './output';
 import Editor from "@monaco-editor/react";
-import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { toast } from 'react-toastify';
 import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
+import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-// import MenuItem from '@mui/material/MenuItem';
-import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import Select from '@mui/material/Select';
 // import Button from '@mui/material/Button';
 const CodeEditor = (props) => {
     const [codeContent, setCodeContent] = useState("");
@@ -22,14 +19,38 @@ const CodeEditor = (props) => {
     const [output, setOutput] = useState("");
     const [fileName, setFileName] = useState("");
     const [codeIndex, setCodeIndex] = useState('');
-
-    const [toSave, setToSave] = useState(false);
     const [savedFiles, setSavedFiles] = useState([]);
+    const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
     // const [langNameMapper,setLNM]=useState({'python3':'Python','java':'Java','js':'JavaScript','cpp':'C++','csharp':'C#','go':'Go'}) 
     // var qs = require('qs');
-
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+      };
+      const style2 = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        display:'flex',
+        justifyContent:'space-between',
+        p: 4,
+      };
     const getFiles = async () => {
-        const res = await fetch('https://compiler-mern-app.onrender.com/getfiles', {
+        const res = await fetch('/getfiles', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 'email': JSON.parse(localStorage.userData).email })
@@ -47,12 +68,13 @@ const CodeEditor = (props) => {
     // --under construction----------------------------------------------------------------
 
     const fileSaver = async () => {
-        setToSave(false);
+        // setToSave(false);
+        handleClose();
         let fileData = {
             codeContent, 'lang': props.pl, fileName, 'email': JSON.parse(localStorage.userData).email
         }
         console.log(fileData);
-        const res = await fetch('https://compiler-mern-app.onrender.com/savefile', {
+        const res = await fetch('/savefile', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(fileData)
@@ -110,7 +132,17 @@ const CodeEditor = (props) => {
         getFiles()
     }, [])
     const compiler = async () => {
-        setOutput("loading...")
+        toast("compiling", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            type: "info",
+            theme: "colored",
+        });
         const url = 'https://online-code-compiler.p.rapidapi.com/v1/';
         console.log(props.pl);
         const options = {
@@ -168,14 +200,19 @@ const CodeEditor = (props) => {
                     variant="contained"
                     style={{ margin: '10px 10px' }}
                 >Copy Code</Button>
-                <Popup trigger={<Button
-                    variant="contained"
-                    style={{ margin: '10px 10px' }}
-                >Save File</Button>}>
-                    <div style={{ display:'flex'}}>
-                    <TextField id="outlined-basic" label="File Name" variant="outlined" onChange={(e) => setFileName(e.target.value)} />
-                <Button style={{ backgroundColor: 'yellowgreen'}} onClick={() => fileSaver()}>save</Button></div>
-                </Popup>
+      <Button variant="contained" onClick={handleOpen}>Save File</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style2}>
+            <TextField id="outlined-basic" label="File Name" variant="outlined" onChange={(e) => setFileName(e.target.value)} />
+            <Button style={{ backgroundColor: 'yellowgreen'}} onClick={() => fileSaver()}>save</Button>
+        </Box>
+      </Modal>
+    
                 <Button
                     onClick={() => { setCodeContent(""); setCodeIndex('noFile') }}
                     variant="contained"
@@ -195,10 +232,11 @@ const CodeEditor = (props) => {
                     </Select>
                 </FormControl>
             </div>
-
+            <div style={{display:'flex', width:'100%'}}>
+            
             <Editor
                 height='50vh'
-                width='95vw'
+                width='70vw'
                 options={{
                     scrollBeyondLastLine: false,
                     fontSize: "30px"
@@ -209,16 +247,17 @@ const CodeEditor = (props) => {
                 theme="vs-dark"
                 onChange={onChange}
             />
+            <div style={{display:'flex',flexDirection:'column',justifyContent:'space-around'}}>
             <textarea
                 id=""
                 cols="30"
-                rows="5"
-                style={{ width: '80vw', border: '2px solid black', margin: '5px 0px', backgroundColor: '#121212', color: 'white', padding: '5px 5px', borderRadius: '10px' }}
+                rows="9"
+                style={{ marginLeft:'50px', border: '2px solid black', backgroundColor: '#121212', color: 'white', padding: '5px 5px', borderRadius: '10px' }}
                 placeholder="enter inputs here..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
             />
-            <Output outRes={output} />
+            <Output outRes={output} /></div></div>
         </div>
     );
 }

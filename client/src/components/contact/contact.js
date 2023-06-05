@@ -13,7 +13,7 @@ const Contact = () => {
   const [message,setMessage]=useState("");
   const [phone,setPhone]=useState("");
   const handleMail= async ()=>{
-    const res= await fetch("https://compiler-mern-app.onrender.com/sendmail",{
+    const res= await fetch("/sendmail",{
       method:'POST',
       headers:{
         "Content-Type":'application/json'

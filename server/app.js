@@ -1,12 +1,19 @@
 const dotenv = require('dotenv');
 const express = require('express');
+const cors=require('cors');
 const app = express();
+
 
 dotenv.config({ path: './config.env' })
 require('./db/conn.js')
 app.use(express.json())
 app.use(require('./router/auth'));
-
+app.use(cors({
+    origin: "*"
+}));
+app.use(cors({
+    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+}));
 const PORT = process.env.PORT;
 
 const midware = (req, res, next) => {
