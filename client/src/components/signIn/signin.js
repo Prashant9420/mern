@@ -23,10 +23,14 @@ function Signin(props) {
     const { email, password } = user;
     const res = await fetch('https://compiler-mern-app.onrender.com/login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json',
-    },
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
       body: JSON.stringify({ email, password })
-    })
+    });
     const data = await res.json();
     console.log(data)
     localStorage.setItem("userData", JSON.stringify(data));
