@@ -7,14 +7,14 @@ const app = express();
 dotenv.config({ path: './config.env' })
 require('./db/conn.js')
 app.use(express.json())
-app.use(require('./router/auth'));
 app.use(cors({
-    origin: "*"
-}));
-app.use(cors({
-    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+    origin: 'https://master--effulgent-scone-3c8d71.netlify.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 const PORT = process.env.PORT;
+
+app.use(require('./router/auth'));
 
 const midware = (req, res, next) => {
     console.log("hello from middleware");

@@ -32,7 +32,8 @@ router.post('/update',async (req,res)=>{
 })
 
 router.post('/register', async (req, res) => {
-    const { username, email, phone, work, password, cpassword } = req.body;
+  const { username, email, phone, work, password, cpassword } = req.body;
+    
     if (!username || !email || !phone || !work || !password || !cpassword) {
         return res.status(401).json({ mess: 'pls fill all fields' })
     }

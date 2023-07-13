@@ -43,7 +43,8 @@ export default function Signin() {
       headers:{
         "Content-Type":'application/json'
       },
-      body:JSON.stringify({username,email,phone,message:'Welcome '+username,mode:"signup"})
+      body:JSON.stringify({username,email,phone,message:'Welcome '+username,mode:"signup"}),
+      mode: 'cors',
     })
     await resp.json();
     if(resp.status ===200){
@@ -69,7 +70,8 @@ export default function Signin() {
       headers:{
         "Content-Type":"application/json"
       },
-      body:JSON.stringify({username,email,phone,work,password,cpassword})
+      body:JSON.stringify({username,email,phone,work,password,cpassword}),
+      mode: 'cors',
     })
     const data=await res.json();
     if(res.status===401 || !data){

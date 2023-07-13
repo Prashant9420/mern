@@ -51,7 +51,7 @@ const Forgetpass = () => {
         }
     }
     const handleUpdatePass = async () => {
-        const res = await fetch('/update',{
+        const res = await fetch('https://compiler-mern-app.onrender.com/update',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -103,7 +103,7 @@ const Forgetpass = () => {
     const handleOtp = async (e) => {
         let otp = Math.floor(1000 + Math.random() * 9000);
         setGeneratedOtp(otp);
-        const res = await fetch('/sendmail', {
+        const res = await fetch('https://compiler-mern-app.onrender.com/sendmail', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

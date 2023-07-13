@@ -25,10 +25,11 @@ function Signin(props) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-        'Access-Control-Allow-Headers': 'Content-Type',
+        // 'Access-Control-Allow-Origin': '*',
+        // 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+        // 'Access-Control-Allow-Headers': 'Content-Type, Authorization'
       },
+      mode: 'cors',
       body: JSON.stringify({ email, password })
     });
     const data = await res.json();
