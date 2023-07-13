@@ -64,7 +64,7 @@ export default function Signin() {
       return;
     }
     // =========================================================
-    const res = await fetch("/register",{
+    const res = await fetch("https://compiler-mern-app.onrender.com/register",{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
