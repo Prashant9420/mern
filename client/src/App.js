@@ -1,8 +1,7 @@
 import './App.css';
-import ResponsiveAppBar from './components/header/navBar';
+import ResponsiveAppBar from './components/header/navbar2';
 import Signup from './components/signUp/signup';
 import Home from './components/home/home'
-import About from './components/about/about'
 import Signin from './components/signIn/signin'
 import Contact from './components/contact/contact';
 import PageNotFound from './components/pageNotFound/pageNotFound';
@@ -11,7 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import ForegetPass from './components/signIn/forgetPass/forgetpass';
 import { useState } from 'react';
 function App() {
-  const [isSignin,SetIsSignin]=useState(false);
+  const [isSignin,SetIsSignin]=useState((localStorage.userData)?true:false);
   return (
     <div className="App">
     <ResponsiveAppBar loginShown={isSignin} signinChkHandler={SetIsSignin}/>
@@ -19,7 +18,6 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home signinChk={isSignin}/>} />
             <Route exact path="/signup" element={<Signup signinChkHandler={SetIsSignin}/>} />
-            <Route exact path="/about" element={<About signinChk={isSignin} />} />
             <Route exact path="/contact" element={<Contact signinChk={isSignin} />} />
             <Route exact path="/signin" element={<Signin signinChkHandler={SetIsSignin}/>}/>
             <Route exact path="/signin/forgetpass" element={<ForegetPass/>}/>

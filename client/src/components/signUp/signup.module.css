@@ -14,3 +14,9 @@ label{
         font-size: 2vw;
         font-weight: bolder;  
 }
+@media only screen and (max-width: 450px) {
+        .btn{
+            width: 50vw;
+        }
+        
+    }

@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import { NavLink,useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import {toast} from 'react-toastify';
-
+import ServerURL from '../../serverUrl';
 export default function Signin() {
   const navigate=useNavigate();
   const [user,setUser]=useState({
@@ -38,7 +38,7 @@ export default function Signin() {
       });
       return;}
     // ---------------------------------------------------
-    const resp= await fetch("https://compiler-mern-app.onrender.com/sendmail",{
+    const resp= await fetch(`${ServerURL}/sendmail`,{
       method:'POST',
       headers:{
         "Content-Type":'application/json'
@@ -65,7 +65,7 @@ export default function Signin() {
       return;
     }
     // =========================================================
-    const res = await fetch("https://compiler-mern-app.onrender.com/register",{
+    const res = await fetch(`${ServerURL}/register`,{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
@@ -131,6 +131,7 @@ export default function Signin() {
   return (
     <div className={style.demo}>
     <label>Sign Up</label>
+    <div style={{textAlign:'center'}}>
     <Box
       component="form"
       sx={{
@@ -200,6 +201,7 @@ export default function Signin() {
         />
       </div>
     </Box>
+    </div>
     <Button variant="contained" className={style.btn} onClick={handleSubmit}>Sign Up </Button>
     <NavLink to="/signin">Already have an account?</NavLink>
     </div>

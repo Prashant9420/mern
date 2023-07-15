@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import EmailIcon from '@mui/icons-material/Email';
 import Button from '@mui/material/Button';
+import ServerURL from '../../serverUrl';
 import {toast} from 'react-toastify';
 import HomeIcon from '@mui/icons-material/Home';
 const Contact = () => {
@@ -13,7 +14,7 @@ const Contact = () => {
   const [message,setMessage]=useState("");
   const [phone,setPhone]=useState("");
   const handleMail= async ()=>{
-    const res= await fetch("https://compiler-mern-app.onrender.com/sendmail",{
+    const res= await fetch(`${ServerURL}/sendmail`,{
       method:'POST',
       headers:{
         "Content-Type":'application/json'
@@ -104,8 +105,8 @@ const Contact = () => {
       <TextField id="outlined-basic" label="Your Email" variant="outlined" onChange={(e)=>setEmail(e.target.value)}/>
       <TextField id="outlined-basic" label="Your Phone Number" variant="outlined" onChange={(e)=>setPhone(e.target.value)}/>
     </Box>
-    <textarea name="" id="" cols="78" rows="10" style={{borderRadius:'10px',padding:'5px 10px'}} onChange={(e)=>setMessage(e.target.value)}></textarea>
-    <Button variant="contained" style={{width:'20%'}} onClick={handleMail}>Send Message</Button>
+    <textarea placeholder="your message..." name="" id="" cols="78" rows="10" style={{borderRadius:'10px',padding:'5px 10px',margin:'5px'}} onChange={(e)=>setMessage(e.target.value)}></textarea>
+    <Button variant="contained" className={style.btn} onClick={handleMail}>Send Message</Button>
       </div>
     </div>
   )

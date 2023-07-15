@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import ServerURL from '../../serverUrl';
 function Signin(props) {
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -21,7 +22,7 @@ function Signin(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = user;
-    const res = await fetch('https://compiler-mern-app.onrender.com/login', {
+    const res = await fetch(`${ServerURL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

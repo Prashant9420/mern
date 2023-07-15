@@ -8,9 +8,14 @@
     align-items: center;
 }
 label{
-    font-size: 2vw;
+    font-size: 30px;
     font-weight: bolder;
 }
 .btn{
-    width: 10%;
+    width: 10vw;
+}
+@media only screen and (max-width: 450px) {
+    .btn{
+        width: 50vw;
+    }
 }

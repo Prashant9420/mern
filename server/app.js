@@ -8,7 +8,8 @@ dotenv.config({ path: './config.env' })
 require('./db/conn.js')
 app.use(express.json())
 app.use(cors({
-    origin: 'https://master--effulgent-scone-3c8d71.netlify.app',
+    // origin: 'http://localhost:3000',
+    origin:'https://master--effulgent-scone-3c8d71.netlify.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));

@@ -6,12 +6,14 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import { toast } from 'react-toastify';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
+import ServerURL from '../../serverUrl';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
+import styles from './editor.module.css'
 // import Button from '@mui/material/Button';
 const CodeEditor = (props) => {
     const [codeContent, setCodeContent] = useState("");
@@ -50,7 +52,7 @@ const CodeEditor = (props) => {
         p: 4,
       };
     const getFiles = async () => {
-        const res = await fetch('https://compiler-mern-app.onrender.com/getfiles', {
+        const res = await fetch(`${ServerURL}/getfiles`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 'email': JSON.parse(localStorage.userData).email })
@@ -74,7 +76,7 @@ const CodeEditor = (props) => {
             codeContent, 'lang': props.pl, fileName, 'email': JSON.parse(localStorage.userData).email
         }
         console.log(fileData);
-        const res = await fetch('https://compiler-mern-app.onrender.com/savefile', {
+        const res = await fetch(`${ServerURL}/savefile`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(fileData)
@@ -187,9 +189,9 @@ const CodeEditor = (props) => {
         setCodeContent(savedFiles[event.target.value].fileContent);
     };
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
-
-            <div>
+        <div className={styles.container}>
+ {/* style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }} */}
+            <div className={styles.options}>
                 <Button
                     onClick={() => compiler()}
                     variant="contained"
@@ -232,27 +234,30 @@ const CodeEditor = (props) => {
                     </Select>
                 </FormControl>
             </div>
-            <div style={{display:'flex', width:'100%'}}>
-            
+            <div className={styles.editor}>
+            {/* style={{display:'flex', width:'100%'}} */}
+            <div className={styles.edit}>
             <Editor
-                height='50vh'
-                width='70vw'
+                height='100%'
+                width='100%'
                 options={{
                     scrollBeyondLastLine: false,
-                    fontSize: "30px"
+                    fontSize: 28,
                 }}
                 defaultLanguage="java"
                 defaultValue="//enter your code here"
                 value={codeContent}
+                
                 theme="vs-dark"
+                // className={styles.edit}
                 onChange={onChange}
-            />
-            <div style={{display:'flex',flexDirection:'column',justifyContent:'space-around'}}>
+            /></div>
+            <div className={styles.output}>
             <textarea
                 id=""
                 cols="30"
                 rows="9"
-                style={{ marginLeft:'50px', border: '2px solid black', backgroundColor: '#121212', color: 'white', padding: '5px 5px', borderRadius: '10px' }}
+                className={styles.input}
                 placeholder="enter inputs here..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}

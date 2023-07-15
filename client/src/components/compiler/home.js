@@ -13,7 +13,6 @@ const Home = () => {
   return (
     <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
       <FormControl fullWidth 
-      // style={{width:'20vw',margin:'20px 10px'}}
       className={style.select}
       >
         <InputLabel id="demo-simple-select-label">Select Language</InputLabel>

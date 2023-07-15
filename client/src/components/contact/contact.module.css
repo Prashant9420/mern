@@ -4,14 +4,10 @@
     justify-content: space-around;
     align-items: center;
     /* border: 2px solid green; */
-    height: 90vh;
+    height: 1000px;
 }
 .info{
     display:flex;
-    /* border: 2px solid red; */
-    /* padding: 10px; */
-    /* position: fixed; */
-    /* height: 20%; */
     justify-content: space-between;
     width: 80vw;
 }
@@ -33,4 +29,25 @@
     box-shadow: 5px 3px 3px rgb(103, 100, 100);
     
     /* align-items: center; */
+}
+.btn{
+    width: 200px;
+    margin:2px;
+}
+@media only screen and (max-width: 400px) {
+    .info{
+        flex-direction: column;
+        width: 100%;
+    }
+    .git{
+        width: 100vw;
+    }
+    .info>div{
+        margin:10px
+    }
+    .btn{
+        width: 200px;
+        margin:2px;
+    }
+
 }

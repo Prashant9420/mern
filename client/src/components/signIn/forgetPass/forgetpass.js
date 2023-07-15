@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import ServerURL from '../../../serverUrl';
 
 const Forgetpass = () => {
     const [email, setEmail] = useState("");
@@ -51,7 +52,7 @@ const Forgetpass = () => {
         }
     }
     const handleUpdatePass = async () => {
-        const res = await fetch('https://compiler-mern-app.onrender.com/update',{
+        const res = await fetch(`${ServerURL}/update`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -103,7 +104,7 @@ const Forgetpass = () => {
     const handleOtp = async (e) => {
         let otp = Math.floor(1000 + Math.random() * 9000);
         setGeneratedOtp(otp);
-        const res = await fetch('https://compiler-mern-app.onrender.com/sendmail', {
+        const res = await fetch(`${ServerURL}/sendmail`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

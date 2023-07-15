@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import styles from './output.module.css'
 const Output = (props) => {
   return (
     <div>
@@ -8,7 +8,7 @@ const Output = (props) => {
         placeholder="your output here..."
         value={props.outRes}
         cols="30"
-        style={{marginLeft:'50px', border:'2px solid black',backgroundColor:'#121212',color:'white',padding:'5px 5px',borderRadius:'10px'}}
+        className={styles.output}
         rows="9"
       />
     </div>
