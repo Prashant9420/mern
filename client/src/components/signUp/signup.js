@@ -184,7 +184,7 @@ export default function Signin() {
       <TextField
           id="outlined-multiline-flexible"
           label="Create Password"
-          multiline
+          type={'password'}
           maxRows={4}
           name="password"
           value={user.password}
@@ -193,7 +193,7 @@ export default function Signin() {
         <TextField
           id="outlined-multiline-flexible"
           label="Confirm Password"
-          multiline
+          type={'password'}
           maxRows={4}
           name="cpassword"
           value={user.cpassword}
@@ -202,7 +202,7 @@ export default function Signin() {
       </div>
     </Box>
     </div>
-    <Button variant="contained" className={style.btn} onClick={handleSubmit}>Sign Up </Button>
+    <Button variant="contained" className={style.btn} onClick={handleSubmit}>Sign Up</Button>
     <NavLink to="/signin">Already have an account?</NavLink>
     </div>
   );

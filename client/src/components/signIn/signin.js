@@ -105,9 +105,9 @@ function Signin(props) {
           <TextField
             id="outlined-multiline-flexible"
             label="Password"
-            multiline
             maxRows={4}
             name="password"
+            type={"password"}
             value={user.password}
             onChange={handleChange}
           />
